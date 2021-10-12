@@ -1,0 +1,15 @@
+com\inetum\realdolmen\i18n\LanguageOptionBean.class
+com\inetum\realdolmen\projects\NewProjectBean.class
+com\inetum\realdolmen\i18n\LanguageSwitcherBean.class
+com\inetum\realdolmen\timeregistrations\TimeRegistration.class
+com\inetum\realdolmen\timeregistrations\TimeRegistrationBean.class
+com\inetum\realdolmen\projects\ProjectDetailsBean.class
+com\inetum\realdolmen\projects\ProjectConverter.class
+com\inetum\realdolmen\timeregistrations\NewTimeRegistrationBean.class
+com\inetum\realdolmen\projects\ProjectsBean.class
+com\inetum\realdolmen\timeregistrations\TimeOptionBean.class
+com\inetum\realdolmen\timeregistrations\TRMService.class
+com\inetum\realdolmen\security\TRMIdentityStore.class
+com\inetum\realdolmen\projects\Project.class
+com\inetum\realdolmen\security\LogoutBean.class
+com\inetum\realdolmen\security\LoginBean.class

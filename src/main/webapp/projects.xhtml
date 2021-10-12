@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+    template="/WEB-INF/templates/master.xhtml">
+
+    <ui:define name="title">
+        #{msg['projects_title']}
+    </ui:define>
+
+    <ui:define name="content">
+        <h:dataTable id="table" value="#{projectsBean.projects}" var="project">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{project.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">#{msg['title']}</f:facet>
+                <h:link outcome="/project-details" value="#{project.title}">
+                    <f:param name="id" value="#{project.id}" />
+                </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">#{msg['hours']}</f:facet>
+                #{project.hours}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Remaining Hours</f:facet>
+                #{project.remainingHours}
+            </h:column>
+        </h:dataTable>
+
+        <h3>#{msg['add_project_title']}</h3>
+
+        <h:form>
+            <h:outputLabel for="projectTitle" value="#{msg['title']}" />
+            <h:inputText id="projectTitle" value="#{newProjectBean.title}">
+                <f:validateRequired />
+            </h:inputText>
+            <h:outputLabel for="projectHours" value="#{msg['hours']}" />
+            <h:inputText id="projectHours" value="#{newProjectBean.hours}">
+                <f:validateRequired />
+            </h:inputText>
+
+            <h:commandButton value="OK">
+                <f:ajax listener="#{newProjectBean.createProject()}" execute="@form" render=":table" />
+            </h:commandButton>
+
+            <h:message for="projectTitle" />
+            <h:message for="projectHours" />
+        </h:form>
+
+    </ui:define>
+</ui:composition>

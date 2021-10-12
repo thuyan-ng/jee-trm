@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+    template="/WEB-INF/templates/master.xhtml" xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        Time Registrations
+    </ui:define>
+    <ui:define name="content">
+        <h:outputText rendered="#{empty request.userPrincipal}" value="You must be logged in" />
+
+
+        <h:dataTable rendered="#{not empty request.userPrincipal}" id="table"
+            value="#{timeRegistrationBean.timeRegistrations}" var="registration">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{registration.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Date</f:facet>
+                #{registration.date}
+            </h:column>
+            <h:column>
+                <f:facet name="header">#{msg['hours']}</f:facet>
+                #{registration.hours}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Project</f:facet>
+                #{registration.project.title}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Consultant</f:facet>
+                #{registration.consultant}
+            </h:column>
+        </h:dataTable>
+
+        <h3>
+            <h:outputText rendered="#{not empty request.userPrincipal}" value="Add time registration" />
+        </h3>
+
+        <h:form rendered="#{not empty request.userPrincipal}">
+            <h:outputLabel value="Projet:" for="project" />
+            <h:selectOneMenu value="#{newTimeRegistrationBean.projectId}">
+                <f:selectItems value="#{projectsBean.projects}" var="p" itemLabel="#{p.title}" itemValue="#{p.id}" />
+            </h:selectOneMenu>
+
+            <h:outputLabel value="#{msg['hours']}:" for="hours" />
+            <h:selectOneMenu value="#{newTimeRegistrationBean.hours}">
+                <f:selectItems value="#{timeOptionBean.timeOptions}" var="o" itemValue="#{o}" />
+            </h:selectOneMenu>
+
+            <p:calendar value="#{newTimeRegistrationBean.date}" mode="popup" showOn="button" />
+
+            <h:commandButton value="OK" action="#{newTimeRegistrationBean.create()}" />
+            <h:messages globalOnly="true" class="error-msg" />
+        </h:form>
+
+    </ui:define>
+</ui:composition>
